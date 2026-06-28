@@ -10,16 +10,17 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 })
 
 export const DB = {
-  providers: 'providers',
-  phoneNumbers: 'phone_numbers',
-  recharges: 'recharges',
-  ivrCalls: 'ivr_calls',
-  ivrMenu: 'ivr_menu',
+  companies: 'companies',
+  menuItems: 'menu_items',
+  callers: 'callers',
+  calls: 'calls',
+  orders: 'orders',
+  complaints: 'complaints',
+  shipments: 'shipments',
 }
 
 export const EDGE_FUNCTIONS = {
   ivrHandler: `${supabaseUrl}/functions/v1/ivr-handler`,
-  rechargeLookup: `${supabaseUrl}/functions/v1/recharge-lookup`,
 }
 
 export async function callEdgeFunction(url: string, body: unknown) {

@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { Dashboard } from './pages/Dashboard'
-import { NumbersPage } from './pages/Numbers'
-import { RechargesPage } from './pages/Recharges'
-import { IVRPage } from './pages/IVR'
+import { CompaniesPage } from './pages/Companies'
 import { CallsPage } from './pages/Calls'
-import { ProvidersPage } from './pages/Providers'
+import { OrdersPage } from './pages/Orders'
+import { ComplaintsPage } from './pages/Complaints'
+import { ShipmentsPage } from './pages/Shipments'
+import { MenuPage } from './pages/Menu'
+import { SimulatorPage } from './pages/Simulator'
 import { SettingsPage } from './pages/Settings'
 import './styles/global.css'
 
@@ -17,11 +19,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/numbers" element={<NumbersPage />} />
-          <Route path="/recharges" element={<RechargesPage />} />
-          <Route path="/ivr" element={<IVRPage />} />
+          <Route path="/companies" element={<CompaniesPage />} />
           <Route path="/calls" element={<CallsPage />} />
-          <Route path="/providers" element={<ProvidersPage />} />
+          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/complaints" element={<ComplaintsPage />} />
+          <Route path="/shipments" element={<ShipmentsPage />} />
+          <Route path="/menu" element={<MenuPage />} />
+          <Route path="/simulator" element={<SimulatorPage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Route>
       </Routes>

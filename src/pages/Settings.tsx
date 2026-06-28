@@ -1,137 +1,123 @@
-import { Settings, Phone, Volume2, Zap, Save } from 'lucide-react'
 import { useState } from 'react'
+import { Settings2, Info, Globe, Shield, Zap } from 'lucide-react'
 
 export function SettingsPage() {
   const [settings, setSettings] = useState({
-    companyName: 'شحن أرقام',
-    defaultCurrency: 'جنيه',
-    ivrNumber: '19000',
-    autoRecharge: true,
-    notifyOnFail: true,
-    maxRechargeAmount: 500,
-    minRechargeAmount: 5,
+    language: 'ar',
+    autoRespond: true,
+    recordCalls: true,
+    securityCheck: true,
   })
-  const [saved, setSaved] = useState(false)
-
-  const handleSave = () => {
-    setSaved(true)
-    setTimeout(() => setSaved(false), 2000)
-  }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-      <div className="card" style={{ padding: 'var(--space-5)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
-          <div style={{ width: '44px', height: '44px', borderRadius: 'var(--radius-md)', background: 'var(--primary-50)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary-600)' }}>
-            <Settings size={22} />
-          </div>
-          <div>
-            <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--neutral-900)' }}>الإعدادات العامة</h3>
-            <p style={{ fontSize: '13px', color: 'var(--neutral-500)' }}>إعدادات النظام الأساسية</p>
-          </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)', maxWidth: '700px' }}>
+      <div className="card" style={{ padding: 'var(--space-6)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-5)' }}>
+          <Settings2 size={20} color="var(--primary-600)" />
+          <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--neutral-900)' }}>الإعدادات العامة</h3>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)' }}>
-          <div>
-            <label className="label">اسم الشركة</label>
-            <input className="input" value={settings.companyName} onChange={(e) => setSettings({ ...settings, companyName: e.target.value })} />
-          </div>
-          <div>
-            <label className="label">العملة</label>
-            <input className="input" value={settings.defaultCurrency} onChange={(e) => setSettings({ ...settings, defaultCurrency: e.target.value })} />
-          </div>
-        </div>
-      </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+          <SettingRow
+            icon={<Globe size={18} />}
+            title="اللغة"
+            description="لغة الرد الآلي والواجهة"
+          >
+            <select className="input" style={{ width: '150px' }} value={settings.language} onChange={(e) => setSettings({ ...settings, language: e.target.value })}>
+              <option value="ar">العربية</option>
+              <option value="en">English</option>
+            </select>
+          </SettingRow>
 
-      <div className="card" style={{ padding: 'var(--space-5)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
-          <div style={{ width: '44px', height: '44px', borderRadius: 'var(--radius-md)', background: 'var(--secondary-50)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--secondary-600)' }}>
-            <Phone size={22} />
-          </div>
-          <div>
-            <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--neutral-900)' }}>إعدادات الرد الآلي</h3>
-            <p style={{ fontSize: '13px', color: 'var(--neutral-500)' }}>رقم الاستقبال والسلوك الافتراضي</p>
-          </div>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)' }}>
-          <div>
-            <label className="label">رقم الاستقبال</label>
-            <input className="input" value={settings.ivrNumber} onChange={(e) => setSettings({ ...settings, ivrNumber: e.target.value })} style={{ fontFamily: 'monospace' }} />
-          </div>
-          <div>
-            <label className="label">الحد الأقصى للشحن (جنيه)</label>
-            <input className="input" type="number" value={settings.maxRechargeAmount} onChange={(e) => setSettings({ ...settings, maxRechargeAmount: Number(e.target.value) })} />
-          </div>
-        </div>
-
-        <div style={{ marginTop: 'var(--space-4)', display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <ToggleRow
+          <SettingRow
             icon={<Zap size={18} />}
-            label="الشحن التلقائي"
-            description="تنفيذ عمليات الشحن تلقائياً عند تأكيدها"
-            checked={settings.autoRecharge}
-            onChange={(v) => setSettings({ ...settings, autoRecharge: v })}
-          />
-          <ToggleRow
-            icon={<Volume2 size={18} />}
-            label="إشعار عند فشل الشحن"
-            description="إرسال إشعار عند فشل أي عملية شحن"
-            checked={settings.notifyOnFail}
-            onChange={(v) => setSettings({ ...settings, notifyOnFail: v })}
-          />
+            title="الرد التلقائي"
+            description="تفعيل الرد الآلي على المكالمات الواردة"
+          >
+            <Toggle value={settings.autoRespond} onChange={(v) => setSettings({ ...settings, autoRespond: v })} />
+          </SettingRow>
+
+          <SettingRow
+            icon={<Info size={18} />}
+            title="تسجيل المكالمات"
+            description="حفظ نص المحادثات لكل مكالمة"
+          >
+            <Toggle value={settings.recordCalls} onChange={(v) => setSettings({ ...settings, recordCalls: v })} />
+          </SettingRow>
+
+          <SettingRow
+            icon={<Shield size={18} />}
+            title="التحقق برقم الهاتف"
+            description="ربط كل عملية برقم هاتف المتصل للأمان"
+          >
+            <Toggle value={settings.securityCheck} onChange={(v) => setSettings({ ...settings, securityCheck: v })} />
+          </SettingRow>
         </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <button className="btn btn-primary" onClick={handleSave}>
-          <Save size={18} /> {saved ? 'تم الحفظ!' : 'حفظ الإعدادات'}
-        </button>
+      <div className="card" style={{ padding: 'var(--space-6)' }}>
+        <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--neutral-900)', marginBottom: 'var(--space-4)' }}>عن النظام</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', fontSize: '13px', color: 'var(--neutral-600)' }}>
+          <InfoRow label="الإصدار" value="3.0.0" />
+          <InfoRow label="النوع" value="نظام رد آلي عالمي متعدد الشركات" />
+          <InfoRow label="الخدمات المدعومة" value="شحن، مطاعم، عيادات، عام" />
+          <InfoRow label="قاعدة البيانات" value="Supabase" />
+        </div>
       </div>
     </div>
   )
 }
 
-function ToggleRow({ icon, label, description, checked, onChange }: {
-  icon: React.ReactNode
-  label: string
-  description: string
-  checked: boolean
-  onChange: (v: boolean) => void
-}) {
+function SettingRow({ icon, title, description, children }: { icon: React.ReactNode; title: string; description: string; children: React.ReactNode }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-3)', background: 'var(--neutral-50)', borderRadius: 'var(--radius-md)' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-4)', borderRadius: 'var(--radius-md)', background: 'var(--neutral-50)' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-        <div style={{ color: 'var(--neutral-500)' }}>{icon}</div>
+        <div style={{ color: 'var(--neutral-600)' }}>{icon}</div>
         <div>
-          <p style={{ fontWeight: 600, fontSize: '14px', color: 'var(--neutral-800)' }}>{label}</p>
+          <p style={{ fontWeight: 600, fontSize: '14px', color: 'var(--neutral-900)' }}>{title}</p>
           <p style={{ fontSize: '12px', color: 'var(--neutral-500)' }}>{description}</p>
         </div>
       </div>
-      <button
-        onClick={() => onChange(!checked)}
+      {children}
+    </div>
+  )
+}
+
+function Toggle({ value, onChange }: { value: boolean; onChange: (v: boolean) => void }) {
+  return (
+    <button
+      onClick={() => onChange(!value)}
+      style={{
+        width: '44px',
+        height: '24px',
+        borderRadius: 'var(--radius-full)',
+        background: value ? 'var(--primary-600)' : 'var(--neutral-300)',
+        position: 'relative',
+        transition: 'background 200ms ease',
+        flexShrink: 0,
+      }}
+    >
+      <div
         style={{
-          width: '44px',
-          height: '24px',
-          borderRadius: 'var(--radius-full)',
-          background: checked ? 'var(--success-500)' : 'var(--neutral-300)',
-          position: 'relative',
-          transition: 'background 200ms',
-          cursor: 'pointer',
-        }}
-      >
-        <span style={{
           position: 'absolute',
           top: '2px',
-          right: checked ? '2px' : '22px',
+          right: value ? '2px' : '22px',
           width: '20px',
           height: '20px',
           borderRadius: '50%',
           background: 'white',
-          transition: 'right 200ms',
-          boxShadow: 'var(--shadow-sm)',
-        }} />
-      </button>
+          transition: 'right 200ms ease',
+        }}
+      />
+    </button>
+  )
+}
+
+function InfoRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between', padding: 'var(--space-2) 0', borderBottom: '1px solid var(--neutral-100)' }}>
+      <span style={{ color: 'var(--neutral-500)' }}>{label}</span>
+      <span style={{ fontWeight: 600, color: 'var(--neutral-800)' }}>{value}</span>
     </div>
   )
 }

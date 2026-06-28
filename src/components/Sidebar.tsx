@@ -1,21 +1,25 @@
 import { NavLink } from 'react-router-dom'
 import {
   LayoutDashboard,
-  Smartphone,
-  Zap,
-  PhoneCall,
-  Settings2,
-  History,
   Building2,
+  PhoneCall,
+  ShoppingBag,
+  MessageSquareWarning,
+  Package,
+  UtensilsCrossed,
+  Settings2,
+  Phone,
 } from 'lucide-react'
 
 const navItems = [
   { to: '/', label: 'لوحة التحكم', icon: LayoutDashboard, end: true },
-  { to: '/numbers', label: 'أرقام الهواتف', icon: Smartphone },
-  { to: '/recharges', label: 'عمليات الشحن', icon: Zap },
-  { to: '/ivr', label: 'الرد الآلي', icon: PhoneCall },
-  { to: '/calls', label: 'سجل المكالمات', icon: History },
-  { to: '/providers', label: 'المزودين', icon: Building2 },
+  { to: '/companies', label: 'الشركات', icon: Building2 },
+  { to: '/calls', label: 'المكالمات', icon: PhoneCall },
+  { to: '/orders', label: 'الطلبات', icon: ShoppingBag },
+  { to: '/complaints', label: 'الشكاوى', icon: MessageSquareWarning },
+  { to: '/shipments', label: 'الشحنات', icon: Package },
+  { to: '/menu', label: 'المنيو', icon: UtensilsCrossed },
+  { to: '/simulator', label: 'محاكي المكالمات', icon: Phone },
   { to: '/settings', label: 'الإعدادات', icon: Settings2 },
 ]
 
@@ -72,11 +76,11 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
               color: 'white',
             }}
           >
-            <Zap size={22} />
+            <PhoneCall size={22} />
           </div>
           <div>
-            <h1 style={{ fontSize: '16px', fontWeight: 700, color: 'white' }}>شحن أرقام</h1>
-            <p style={{ fontSize: '11px', color: 'var(--neutral-500)' }}>نظام إدارة الشحن</p>
+            <h1 style={{ fontSize: '16px', fontWeight: 700, color: 'white' }}>مركز الاتصال الذكي</h1>
+            <p style={{ fontSize: '11px', color: 'var(--neutral-500)' }}>نظام رد آلي عالمي</p>
           </div>
         </div>
 
@@ -134,7 +138,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
             textAlign: 'center',
           }}
         >
-          إصدار 2.0.0
+          إصدار 3.0.0
         </div>
       </aside>
     </>
