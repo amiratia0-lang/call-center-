@@ -9,28 +9,22 @@ export function Badge({ variant = 'neutral', children }: BadgeProps) {
 
 export function StatusBadge({ status }: { status: string }) {
   const map: Record<string, { variant: BadgeProps['variant']; label: string }> = {
+    // Phone number status
+    available: { variant: 'info', label: 'متاح' },
+    in_use: { variant: 'success', label: 'قيد الاستخدام' },
+    suspended: { variant: 'error', label: 'موقوف' },
+    expired: { variant: 'neutral', label: 'منتهي' },
+    // Provider status
     active: { variant: 'success', label: 'نشط' },
     inactive: { variant: 'neutral', label: 'غير نشط' },
-    vip: { variant: 'accent', label: 'مميز' },
-    blacklist: { variant: 'error', label: 'قائمة سوداء' },
-    online: { variant: 'success', label: 'متصل' },
-    busy: { variant: 'warning', label: 'مشغول' },
-    offline: { variant: 'neutral', label: 'غير متصل' },
-    break: { variant: 'info', label: 'استراحة' },
-    completed: { variant: 'success', label: 'مكتملة' },
-    ongoing: { variant: 'info', label: 'جارية' },
-    missed: { variant: 'error', label: 'فائتة' },
-    failed: { variant: 'error', label: 'فاشلة' },
-    voicemail: { variant: 'warning', label: 'بريد صوتي' },
-    open: { variant: 'info', label: 'مفتوحة' },
-    in_progress: { variant: 'warning', label: 'قيد المعالجة' },
-    resolved: { variant: 'success', label: 'محلولة' },
-    closed: { variant: 'neutral', label: 'مغلقة' },
-    waiting: { variant: 'warning', label: 'في الانتظار' },
-    answered: { variant: 'success', label: 'تم الرد' },
-    abandoned: { variant: 'error', label: 'متروكة' },
+    // Recharge status
+    pending: { variant: 'warning', label: 'معلق' },
+    completed: { variant: 'success', label: 'مكتمل' },
+    failed: { variant: 'error', label: 'فاشل' },
+    refunded: { variant: 'neutral', label: 'مسترجع' },
+    // IVR call status
+    abandoned: { variant: 'error', label: 'متروك' },
   }
-
   const config = map[status] || { variant: 'neutral' as const, label: status }
   return <Badge variant={config.variant}>{config.label}</Badge>
 }

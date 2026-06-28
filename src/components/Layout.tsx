@@ -4,19 +4,19 @@ import { Sidebar } from './Sidebar'
 import { Header } from './Header'
 
 const pageMeta: Record<string, { title: string; subtitle: string }> = {
-  '/': { title: 'لوحة التحكم', subtitle: 'نظرة عامة على أداء مركز الاتصالات' },
-  '/calls': { title: 'المكالمات', subtitle: 'إدارة سجل المكالمات' },
-  '/customers': { title: 'العملاء', subtitle: 'إدارة قاعدة بيانات العملاء' },
-  '/agents': { title: 'الوكلاء', subtitle: 'إدارة موظفي مركز الاتصالات' },
-  '/tickets': { title: 'التذاكر', subtitle: 'إدارة تذاكر الدعم' },
-  '/queue': { title: 'طابور المكالمات', subtitle: 'المكالمات الواردة في الانتظار' },
-  '/reports': { title: 'التقارير', subtitle: 'تحليلات وإحصائيات الأداء' },
+  '/': { title: 'لوحة التحكم', subtitle: 'نظرة عامة على عمليات الشحن والمكالمات' },
+  '/numbers': { title: 'أرقام الهواتف', subtitle: 'إدارة مخزون أرقام الهواتف' },
+  '/recharges': { title: 'عمليات الشحن', subtitle: 'سجل عمليات شحن الأرقام' },
+  '/ivr': { title: 'الرد الآلي', subtitle: 'إعداد قائمة الرد الآلي (IVR)' },
+  '/calls': { title: 'سجل المكالمات', subtitle: 'سجل مكالمات الرد الآلي الواردة' },
+  '/providers': { title: 'المزودين', subtitle: 'إدارة مزودي خدمات الشحن' },
+  '/settings': { title: 'الإعدادات', subtitle: 'إعدادات النظام' },
 }
 
 export function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const location = useLocation()
-  const meta = pageMeta[location.pathname] || { title: 'مركز الاتصالات', subtitle: '' }
+  const meta = pageMeta[location.pathname] || { title: 'شحن أرقام', subtitle: '' }
 
   return (
     <div style={{ minHeight: '100vh' }}>

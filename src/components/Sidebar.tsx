@@ -1,14 +1,22 @@
 import { NavLink } from 'react-router-dom'
-import { LayoutDashboard, Phone, Users, Headphones, Ticket, ListOrdered, ChartBar as BarChart3, PhoneCall } from 'lucide-react'
+import {
+  LayoutDashboard,
+  Smartphone,
+  Zap,
+  PhoneCall,
+  Settings2,
+  History,
+  Building2,
+} from 'lucide-react'
 
 const navItems = [
   { to: '/', label: 'لوحة التحكم', icon: LayoutDashboard, end: true },
-  { to: '/calls', label: 'المكالمات', icon: Phone },
-  { to: '/customers', label: 'العملاء', icon: Users },
-  { to: '/agents', label: 'الوكلاء', icon: Headphones },
-  { to: '/tickets', label: 'التذاكر', icon: Ticket },
-  { to: '/queue', label: 'طابور المكالمات', icon: ListOrdered },
-  { to: '/reports', label: 'التقارير', icon: BarChart3 },
+  { to: '/numbers', label: 'أرقام الهواتف', icon: Smartphone },
+  { to: '/recharges', label: 'عمليات الشحن', icon: Zap },
+  { to: '/ivr', label: 'الرد الآلي', icon: PhoneCall },
+  { to: '/calls', label: 'سجل المكالمات', icon: History },
+  { to: '/providers', label: 'المزودين', icon: Building2 },
+  { to: '/settings', label: 'الإعدادات', icon: Settings2 },
 ]
 
 export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -28,7 +36,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
         />
       )}
       <aside
-        className="sidebar"
+        className={`sidebar ${open ? 'open' : ''}`}
         style={{
           width: '260px',
           background: 'var(--neutral-900)',
@@ -43,7 +51,6 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
           transition: 'transform 250ms ease',
         }}
       >
-        {/* Logo */}
         <div
           style={{
             padding: 'var(--space-6)',
@@ -65,15 +72,14 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
               color: 'white',
             }}
           >
-            <PhoneCall size={22} />
+            <Zap size={22} />
           </div>
           <div>
-            <h1 style={{ fontSize: '16px', fontWeight: 700, color: 'white' }}>مركز الاتصالات</h1>
-            <p style={{ fontSize: '11px', color: 'var(--neutral-500)' }}>نظام إدارة متكامل</p>
+            <h1 style={{ fontSize: '16px', fontWeight: 700, color: 'white' }}>شحن أرقام</h1>
+            <p style={{ fontSize: '11px', color: 'var(--neutral-500)' }}>نظام إدارة الشحن</p>
           </div>
         </div>
 
-        {/* Nav */}
         <nav style={{ flex: 1, padding: 'var(--space-4)', overflowY: 'auto' }}>
           <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
             {navItems.map((item) => {
@@ -119,7 +125,6 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
           </ul>
         </nav>
 
-        {/* Footer */}
         <div
           style={{
             padding: 'var(--space-4)',
@@ -129,7 +134,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
             textAlign: 'center',
           }}
         >
-          إصدار 1.0.0
+          إصدار 2.0.0
         </div>
       </aside>
     </>

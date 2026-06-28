@@ -1,61 +1,62 @@
-export interface Customer {
+export interface Provider {
   id: string
   name: string
-  phone: string
-  email: string | null
-  company: string | null
-  status: 'active' | 'inactive' | 'vip' | 'blacklist'
+  code: string
+  api_url: string | null
+  api_key: string | null
+  status: 'active' | 'inactive'
+  logo: string | null
+  created_at: string
+}
+
+export interface PhoneNumber {
+  id: string
+  number: string
+  country: string
+  provider_id: string | null
+  balance: number
+  status: 'available' | 'in_use' | 'suspended' | 'expired'
+  owner_name: string | null
+  owner_phone: string | null
   notes: string | null
   created_at: string
+  provider?: Provider | null
 }
 
-export interface Agent {
+export interface Recharge {
   id: string
-  name: string
-  email: string | null
-  phone: string | null
-  department: string
-  status: 'online' | 'busy' | 'offline' | 'break'
-  avatar: string | null
-  extension: string | null
+  phone_number: string
+  amount: number
+  provider_id: string | null
+  status: 'pending' | 'completed' | 'failed' | 'refunded'
+  reference: string | null
+  provider_response: string | null
+  customer_phone: string | null
+  notes: string | null
   created_at: string
+  provider?: Provider | null
 }
 
-export interface Call {
+export interface IVRCall {
   id: string
-  customer_id: string | null
-  agent_id: string | null
-  type: 'inbound' | 'outbound' | 'missed' | 'transferred'
-  status: 'completed' | 'ongoing' | 'missed' | 'failed' | 'voicemail'
+  caller_phone: string
+  dialed_number: string | null
+  menu_choice: string | null
+  input_number: string | null
+  result: string | null
   duration: number
-  rating: number | null
-  notes: string | null
-  started_at: string
+  status: 'completed' | 'failed' | 'abandoned'
   created_at: string
-  customer?: Customer | null
-  agent?: Agent | null
 }
 
-export interface Ticket {
+export interface IVRMenuItem {
   id: string
-  subject: string
-  description: string | null
-  priority: 'low' | 'medium' | 'high' | 'urgent'
-  status: 'open' | 'in_progress' | 'resolved' | 'closed'
-  customer_id: string | null
-  agent_id: string | null
+  key: string
+  label: string
+  voice_message: string
+  action: 'menu' | 'recharge' | 'balance' | 'support' | 'repeat'
+  target_key: string | null
+  is_active: boolean
+  sort_order: number
   created_at: string
-  updated_at: string
-  customer?: Customer | null
-  agent?: Agent | null
-}
-
-export interface QueueEntry {
-  id: string
-  customer_id: string | null
-  priority: 'low' | 'normal' | 'high' | 'urgent'
-  status: 'waiting' | 'answered' | 'abandoned'
-  wait_time: number
-  created_at: string
-  customer?: Customer | null
 }

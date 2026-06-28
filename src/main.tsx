@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { Dashboard } from './pages/Dashboard'
+import { NumbersPage } from './pages/Numbers'
+import { RechargesPage } from './pages/Recharges'
+import { IVRPage } from './pages/IVR'
 import { CallsPage } from './pages/Calls'
-import { CustomersPage } from './pages/Customers'
-import { AgentsPage } from './pages/Agents'
-import { TicketsPage } from './pages/Tickets'
-import { QueuePage } from './pages/Queue'
-import { ReportsPage } from './pages/Reports'
+import { ProvidersPage } from './pages/Providers'
+import { SettingsPage } from './pages/Settings'
 import './styles/global.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -17,12 +17,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/numbers" element={<NumbersPage />} />
+          <Route path="/recharges" element={<RechargesPage />} />
+          <Route path="/ivr" element={<IVRPage />} />
           <Route path="/calls" element={<CallsPage />} />
-          <Route path="/customers" element={<CustomersPage />} />
-          <Route path="/agents" element={<AgentsPage />} />
-          <Route path="/tickets" element={<TicketsPage />} />
-          <Route path="/queue" element={<QueuePage />} />
-          <Route path="/reports" element={<ReportsPage />} />
+          <Route path="/providers" element={<ProvidersPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
